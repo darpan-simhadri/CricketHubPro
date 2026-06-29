@@ -313,7 +313,53 @@ const INITIAL_BADGES: Badge[] = [
   { id: 'consistent_performer', name: 'Consistent Star', icon: '🔥', requirement_description: 'Maintains win rate above 60% over 5 matches', threshold: 60 }
 ];
 
-const INITIAL_TOURNAMENTS: Tournament[] = [];
+const INITIAL_TOURNAMENTS: Tournament[] = [
+  {
+    id: 'a1000000-0000-0000-0000-000000000001',
+    name: 'IPL Cricket Cup 2026',
+    description: 'Experience the ultimate domestic cricket challenge with high intensity matches under floodlights.',
+    banner_url: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=800',
+    venue: 'Wankhede Stadium, Mumbai',
+    start_date: '2026-07-15',
+    end_date: '2026-07-30',
+    prize_pool: 250000,
+    entry_fee: 2000,
+    team_limit: 16,
+    rules: 'Standard T20 Rules. Proper cricket kits required. Max 15 players per team.',
+    status: 'upcoming',
+    players_per_team: 11
+  },
+  {
+    id: 'a1000000-0000-0000-0000-000000000002',
+    name: 'National Championship Trophy',
+    description: 'The ultimate tournament where states battle to win the national bragging rights.',
+    banner_url: 'https://images.unsplash.com/photo-1540747737956-37872404efda?q=80&w=800',
+    venue: 'Chinnaswamy Stadium, Bangalore',
+    start_date: '2026-08-01',
+    end_date: '2026-08-20',
+    prize_pool: 500000,
+    entry_fee: 4500,
+    team_limit: 12,
+    rules: '50 Overs structure. ICC Rules apply. Professional umpires will officiate.',
+    status: 'upcoming',
+    players_per_team: 11
+  },
+  {
+    id: 'a1000000-0000-0000-0000-000000000003',
+    name: 'Street Smash T10 Blast',
+    description: 'Short, lightning fast T10 matches. High entertainment and maximum boundaries.',
+    banner_url: 'https://images.unsplash.com/photo-1593341606579-7f97d27b0c49?q=80&w=800',
+    venue: 'Hub Arena Turf, Delhi',
+    start_date: '2026-06-25',
+    end_date: '2026-06-28',
+    prize_pool: 75000,
+    entry_fee: 800,
+    team_limit: 24,
+    rules: 'T10 Rules. 5-overs bowling limits. 3 fieldsmen allowed outside circle.',
+    status: 'upcoming',
+    players_per_team: 10
+  }
+];
 
 // Seed Profiles & Stats
 const INITIAL_PROFILES: Profile[] = [
@@ -413,12 +459,7 @@ export const DatabaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           localStorage.setItem('crickethub_playerStats', JSON.stringify(cleanedStats));
         }
 
-        // Remove default tournaments
-        const storedTournaments = JSON.parse(localStorage.getItem('crickethub_tournaments') || '[]');
-        const cleanedTournaments = storedTournaments.filter((t: { id: string }) => !DEFAULT_TOURNAMENT_IDS.includes(t.id));
-        if (cleanedTournaments.length !== storedTournaments.length) {
-          localStorage.setItem('crickethub_tournaments', JSON.stringify(cleanedTournaments));
-        }
+        // Keep default tournaments since the user wants them seeded
 
         // Remove default teams
         const storedTeams = JSON.parse(localStorage.getItem('crickethub_teams') || '[]');
